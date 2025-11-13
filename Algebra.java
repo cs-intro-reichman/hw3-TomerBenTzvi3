@@ -53,7 +53,7 @@ public class Algebra {
 			result = minus(x1, result);
 			}
 		} else if (x1 > 0 && x2 < 0) {
-			for (int i = 0; i != x2; i--) {
+			for (int i = 1; i > x2; i--) {
 			result = minus(x1, result);
 			}	
 		}
