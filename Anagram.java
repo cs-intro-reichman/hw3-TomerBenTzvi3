@@ -48,16 +48,14 @@ public class Anagram {
 	public static String preProcess(String str) {
 		String fill = "";
 		String bin = "";
-		String index = "!?@#$%^&*";
+		String special = "!?@#$%^&* ";
 		str = str.toLowerCase();
 		for (int i = 0; i < str.length(); i++) {
-			for (int j = 0; j < index.length(); j++) {
-				if (str.charAt(i) == index.charAt(j)) {
+			char temp = str.charAt(i);
+			if (special.indexOf(temp) == -1) {
+				fill = fill + temp;
+			}else {
 				bin = bin + str.charAt(i);
-			} else if (str.charAt(i) != index.charAt(j)){
-				fill = fill + str.charAt(i);
-				break;
-			}
 			}
 		}
 		return fill;
@@ -67,12 +65,26 @@ public class Anagram {
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		// Replace the following statement with your code
-		str = preProcess(str);
 		String fill = "";
-		int random = ((int)Math.random() * str.length()) + 1;
-		for (int i = 0; i < str.length(); i++) {
+		String bin = "";
+		int wordnum = str.length();
+		int random = (int)(Math.random() * wordnum);
+		str = str.toLowerCase();
+		int i = 0;
+		do {
 			fill = fill + str.charAt(random);
-		}
-		return str;
-	}
+			char index = fill.charAt(i);
+			while (str.charAt(i) == fill.charAt(i)) {
+				fill = fill + str.charAt(random);
+				if (str.charAt(i) != fill.charAt(i) && fill.indexOf(index) == -1) {
+					fill = fill + str.charAt(i);
+					str = str.substring(i, random) + str.substring(random + 1);
+				} else {
+					bin = bin + str.charAt(i);
+				}
+				i++;
+			}
+			}while (fill.length() < str.length());
+		return fill;
+	}  
 }

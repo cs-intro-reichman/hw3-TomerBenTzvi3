@@ -26,8 +26,22 @@ public class Algebra {
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
 		int result = x1;
-		for (int i = 0; i < x2; i++) {
+		if (x1 > 0 && x2 > 0) {
+			for (int i = 0; i < x2; i++) {
 			result++; 
+			}
+		} else if (x1 < 0 && x2 > 0) {
+			for (int i = 0; i < x2; i++) {
+			result++;
+			}
+		} else if (x1 > 0 && x2 < 0) {
+			for (int i = 0; i > x2; i--) {
+			result--;
+			}	
+		}  else if (x1 < 0 && x2 < 0) {
+			for (int i = 0; i < x2; i--) {
+			result--;
+			}
 		}
 		return result;
 	}
@@ -35,9 +49,23 @@ public class Algebra {
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
 		int result = x1;
-		for (int i = 0; i < x2; i++) {
+		if (x1 > 0 && x2 > 0) {
+			for (int i = 0; i < x2; i++) {
 			result--; 
-		}
+			}
+		} else if (x1 < 0 && x2 > 0) {
+			for (int i = 0; i < x2; i++) {
+			result++;
+			}
+		} else if (x1 > 0 && x2 < 0) {
+			for (int i = 0; i > x2; i--) {
+			result++;
+			}	
+		}  else if (x1 < 0 && x2 < 0) {
+			for (int i = 0; i < x2; i--) {
+			result++;
+			}
+	}
 		return result;
 	}
 
@@ -53,12 +81,16 @@ public class Algebra {
 			result = minus(x1, result);
 			}
 		} else if (x1 > 0 && x2 < 0) {
-			for (int i = 1; i > x2; i--) {
+			for (int i = 0; i > x2; i--) {
 			result = minus(x1, result);
 			}	
+		}  else if (x1 < 0 && x2 < 0) {
+			for (int i = 0; i < x2; i--) {
+			result = plus(x1, result);
+			}
 		}
 		return result;
-	}
+}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
@@ -73,7 +105,7 @@ public class Algebra {
 			}
 		} else if (n == 0) {
 			return 1;
-		} else if (x == 0) {
+		} else if (x == 0 || x == 0 && n == 0) {
 			return 0;
 		}
 		return result;
