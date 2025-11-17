@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /** Functions for checking if a given string is an anagram. */
 public class Anagram {
 	public static void main(String args[]) {
@@ -65,26 +67,14 @@ public class Anagram {
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		// Replace the following statement with your code
-		String fill = "";
-		String bin = "";
-		int wordnum = str.length();
-		int random = (int)(Math.random() * wordnum);
-		str = str.toLowerCase();
-		int i = 0;
-		do {
-			fill = fill + str.charAt(random);
-			char index = fill.charAt(i);
-			while (str.charAt(i) == fill.charAt(i)) {
-				fill = fill + str.charAt(random);
-				if (str.charAt(i) != fill.charAt(i) && fill.indexOf(index) == -1) {
-					fill = fill + str.charAt(i);
-					str = str.substring(i, random) + str.substring(random + 1);
-				} else {
-					bin = bin + str.charAt(i);
-				}
-				i++;
-			}
-			}while (fill.length() < str.length());
-		return fill;
+		Random rand = new Random();
+		StringBuilder pool = new StringBuilder(str);
+		StringBuilder result = new StringBuilder(str.length());
+		while (pool.length() > 0) {
+			int idx = rand.nextInt(pool.length());
+			result.append(pool.charAt(idx));
+			pool.deleteCharAt(idx);
+		}
+		return result.toString();
 	}  
 }
