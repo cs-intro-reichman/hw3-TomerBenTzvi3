@@ -25,48 +25,30 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		int result = x1;
-		if (x1 > 0 && x2 > 0) {
+		if (x2 > 0) {
 			for (int i = 0; i < x2; i++) {
-			result++; 
+			x1++; 
 			}
-		} else if (x1 < 0 && x2 > 0) {
-			for (int i = 0; i < x2; i++) {
-			result++;
-			}
-		} else if (x1 > 0 && x2 < 0) {
+		} else {
 			for (int i = 0; i > x2; i--) {
-			result--;
+			x1--;
 			}	
-		}  else if (x1 < 0 && x2 < 0) {
-			for (int i = 0; i < x2; i--) {
-			result--;
-			}
 		}
-		return result;
-	}
+		return x1;
+}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		int result = x1;
-		if (x1 > 0 && x2 > 0) {
+		if (x2 > 0) {
 			for (int i = 0; i < x2; i++) {
-			result--; 
+			x1--; 
 			}
-		} else if (x1 < 0 && x2 > 0) {
-			for (int i = 0; i < x2; i++) {
-			result++;
+		} else {
+			for (int i = 0; i > x2; i++) {
+			x1++;
 			}
-		} else if (x1 > 0 && x2 < 0) {
-			for (int i = 0; i > x2; i--) {
-			result++;
-			}	
-		}  else if (x1 < 0 && x2 < 0) {
-			for (int i = 0; i < x2; i--) {
-			result++;
-			}
-	}
-		return result;
+		} 
+		return x1;
 	}
 
 	// Returns x1 * x2
@@ -78,15 +60,15 @@ public class Algebra {
 			}
 		} else if (x1 < 0 && x2 > 0) {
 			for (int i = 0; i < x2; i++) {
-			result = minus(x1, result);
+			result = plus(x1, result);
 			}
 		} else if (x1 > 0 && x2 < 0) {
-			for (int i = 0; i > x2; i--) {
-			result = minus(x1, result);
+			for (int i = 0; i < x1; i++) {
+			result = plus(result, x2);
 			}	
 		}  else if (x1 < 0 && x2 < 0) {
-			for (int i = 0; i < x2; i--) {
-			result = plus(x1, result);
+			for (int i = 0; i > x2; i--) {
+			result = minus(result, x2);
 			}
 		}
 		return result;
@@ -95,11 +77,7 @@ public class Algebra {
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
 		int result = 1;
-		if (n > 0 && x > 0) {
-			for (int i = 0; i < n; i++) {
-			result = times(x, result);
-			}
-		} else if (n > 0 && x < 0) {
+		if (n > 0 && x > 0 || x < 0) {
 			for (int i = 0; i < n; i++) {
 			result = times(x, result);
 			}
@@ -131,18 +109,18 @@ public class Algebra {
 		}
 		// If the first number is negative and second is positive
 		else if (x1 < 0 && x2 > 0) {
-			times(x2, -1);
+			x1 = times(x1, -1);
 			while (x1 <= x2) {
 				x1 = minus(x1, x2);
-				times++;
+				times--;
 			}
 		}
 		// If the first number is positive and second is negative
 		else if (x1 > 0 && x2 < 0) {
-			times(x1, -1);
-			while (x1 <= x2) {
-					x1 = minus(x1, x2);
-					times++;
+			x2 = times(x2, -1);
+			while (x1 >= x2) {
+					x1 = plus(x1, x2);
+					times--;
 				}
 		}
 		else {
