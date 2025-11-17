@@ -81,13 +81,9 @@ public class Algebra {
 			for (int i = 0; i < n; i++) {
 			result = times(x, result);
 			}
-		} else if (n == 0) {
-			return 1;
-		} else if (x == 0 || x == 0 && n == 0) {
-			return 0;
 		}
 		return result;
-	}
+	}	
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
@@ -123,12 +119,8 @@ public class Algebra {
 					times--;
 				}
 		}
-		else {
-			return 0;
-		}
 		return times;
-	}
-
+		}
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
 		int div = div(x1, x2);
