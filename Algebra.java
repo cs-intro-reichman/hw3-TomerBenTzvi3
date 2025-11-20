@@ -94,41 +94,32 @@ public class Algebra {
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		int times = 0;
-		//If both numbers are positive
+		int result = 0;
 		if (x1 > 0 && x2 > 0) {
-				while (x1 > x2) {
-					x1 = minus(x1, x2);
-					times++;
-				}
-			
-		}
-		//If both numbers are negative
-		else if (x1 < 0 && x2 < 0) {
-				x2 = times(x2, -1);
-				while (x1 < x2) {
-					x1 = minus(x1, x2);
-					times++;
-				}
-		}
-		// If the first number is negative and second is positive
-		else if (x1 < 0 && x2 > 0) {
-			x1 = times(x1, -1);
-			while (x1 < x2) {
+			while (x1 >= x2) {
 				x1 = minus(x1, x2);
-				times--;
+				result++;
+			}
+		} else if (x1 < 0 && x2 < 0) {
+			while (x1 <= x2) {
+				x1 = minus(x1, x2);
+				result++;
+			}
+		} else if (x1 > 0 && x2 < 0) {
+			x2 = times(x2, -1);
+			while (x1 >= x2) {
+				x1 = plus(x1, x2);
+				result--;
+			}
+		} else if (x1 < 0 && x2 > 0) {
+			x1 = times(x1, -1);
+			while (x1 >= x2) {
+				x1 = minus(x1, x2);
+				result--;
 			}
 		}
-		// If the first number is positive and second is negative
-		else if (x1 > 0 && x2 < 0) {
-			x2 = times(x2, -1);
-			while (x1 > x2) {
-					x1 = plus(x1, x2);
-					times--;
-				}
-		}
-		return times;
-		}
+		return result;
+	}
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
 		int div = div(x1, x2);
