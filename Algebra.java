@@ -97,7 +97,7 @@ public class Algebra {
 		int times = 0;
 		//If both numbers are positive
 		if (x1 > 0 && x2 > 0) {
-				while (x1 >= x2) {
+				while (x1 > x2) {
 					x1 = minus(x1, x2);
 					times++;
 				}
@@ -105,8 +105,8 @@ public class Algebra {
 		}
 		//If both numbers are negative
 		else if (x1 < 0 && x2 < 0) {
-				x2 = times(x1, -1);
-				while (x1 <= x2) {
+				x2 = times(x2, -1);
+				while (x1 < x2) {
 					x1 = minus(x1, x2);
 					times++;
 				}
@@ -114,7 +114,7 @@ public class Algebra {
 		// If the first number is negative and second is positive
 		else if (x1 < 0 && x2 > 0) {
 			x1 = times(x1, -1);
-			while (x1 <= x2) {
+			while (x1 < x2) {
 				x1 = minus(x1, x2);
 				times--;
 			}
@@ -122,7 +122,7 @@ public class Algebra {
 		// If the first number is positive and second is negative
 		else if (x1 > 0 && x2 < 0) {
 			x2 = times(x2, -1);
-			while (x1 >= x2) {
+			while (x1 > x2) {
 					x1 = plus(x1, x2);
 					times--;
 				}
@@ -138,21 +138,23 @@ public class Algebra {
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		int result = 0;
-		int fill;
-		if (x == 0) {
-			return 0;
-		}
-		while (result < x) {
-			fill = pow(result, 2);
-			if (fill == x) {
-			break;
+		int low = 0;
+		int high = x;
+		int mid = 0;
+		while (low <= high) {
+			mid = div(plus(low, high), 2);
+			int sq = times(mid, mid);
+			if (sq == x) {
+				return mid;
+			} else if (sq > x) {
+				high = mid - 1;
+			} else if (sq < x) {
+				low = mid + 1;
 			}
-			result++;
-			if (fill > x || fill < x - 1) {
-				return -1;
-			}
 		}
-		return result;
+		if (high < low) {
+			return div(plus(high, low), 2);
+		}
+		return 0;
 	}
 }
