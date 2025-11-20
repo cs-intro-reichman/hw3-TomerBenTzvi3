@@ -64,15 +64,15 @@ public class Algebra {
 			}
 		} else if (x1 < 0 && x2 > 0) {
 			for (int i = 0; i < x2; i++) {
-			result = plus(x1, result);
+			result = minus(x1, result);
 			}
 		} else if (x1 > 0 && x2 < 0) {
 			for (int i = 0; i < x1; i++) {
-			result = plus(result, x2);
+			result = minus(result, x2);
 			}	
 		}  else if (x1 < 0 && x2 < 0) {
 			for (int i = 0; i > x2; i--) {
-			result = minus(result, x2);
+			result = plus(result, x2);
 			}
 		}
 		return result;
@@ -85,6 +85,8 @@ public class Algebra {
 			for (int i = 0; i < n; i++) {
 			result = times(x, result);
 			}
+		}else if (x == 0) {
+			return 0;
 		}
 		return result;
 	}	
@@ -102,6 +104,7 @@ public class Algebra {
 		}
 		//If both numbers are negative
 		else if (x1 < 0 && x2 < 0) {
+				x2 = times(x1, -1);
 				while (x1 <= x2) {
 					x1 = minus(x1, x2);
 					times++;
@@ -136,13 +139,16 @@ public class Algebra {
 	public static int sqrt(int x) {
 		int result = 0;
 		int fill;
+		if (x == 0) {
+			return 0;
+		}
 		while (result < x) {
 			fill = pow(result, 2);
 			if (fill == x) {
 			break;
 			}
 			result++;
-			if (fill > x) {
+			if (fill > x || fill < x - 1) {
 				return -1;
 			}
 		}

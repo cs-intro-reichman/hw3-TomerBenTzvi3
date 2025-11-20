@@ -30,6 +30,9 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
+			if (str1.length() != str2.length()) {
+				return false;
+			}
 			if (str1.length() == str2.length()) {
 				for (int i = 0; i < str1.length(); i++) {
 					for (int j = 0; j < str2.length(); j++) {
