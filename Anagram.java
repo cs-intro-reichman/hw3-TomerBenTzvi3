@@ -30,19 +30,19 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		if (str1.length() != str2.length()) {
+	String processed1 = preProcess(str1);
+		String processed2 = preProcess(str2);
+		if (processed1.length() != processed2.length())
+			return false;
+
+		for (int i = 0; i < processed1.length(); i++) {
+			char c = processed1.charAt(i);
+			int idx = processed2.indexOf(c);
+			if (idx == -1)
 				return false;
+			processed2 = processed2.substring(0, idx) + processed2.substring(idx + 1);
 		}
-		if (str1.length() == str2.length()) {
-			for (int i = 0; i < str1.length(); i++) {
-				for (int j = 0; j < str2.length(); j++) {
-					if (str1.indexOf(i) != str2.indexOf(j)) {
-					return false;
-					}
-				}
-			}
-		}
-		return true;
+		return processed2.isEmpty();
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
