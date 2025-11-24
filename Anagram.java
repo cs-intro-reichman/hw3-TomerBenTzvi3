@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /** Functions for checking if a given string is an anagram. */
 public class Anagram {
 	public static void main(String args[]) {
@@ -28,22 +30,52 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+	String processed1 = preProcess(str1);
+		String processed2 = preProcess(str2);
+		if (processed1.length() != processed2.length())
+			return false;
+
+		for (int i = 0; i < processed1.length(); i++) {
+			char c = processed1.charAt(i);
+			int idx = processed2.indexOf(c);
+			if (idx == -1)
+				return false;
+			processed2 = processed2.substring(0, idx) + processed2.substring(idx + 1);
+		}
+		return processed2.isEmpty();
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
+		String fill = "";
+		String bin = "";
+		String special = "!?@#$%^&* ";
+		str = str.toLowerCase();
+		for (int i = 0; i < str.length(); i++) {
+			char temp = str.charAt(i);
+			if (special.indexOf(temp) == -1) {
+				fill = fill + temp;
+			}else {
+				bin = bin + str.charAt(i);
+			}
+		}
+		return fill;
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		// Replace the following statement with your code
-		return "";
-	}
+		Random rand = new Random();
+		StringBuilder pool = new StringBuilder(str);
+		StringBuilder result = new StringBuilder(str.length());
+		while (pool.length() > 0) {
+			int idx = rand.nextInt(pool.length());
+			result.append(pool.charAt(idx));
+			pool.deleteCharAt(idx);
+		}
+		return result.toString();
+	}  
 }
